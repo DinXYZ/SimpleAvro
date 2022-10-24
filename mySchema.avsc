@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "MyTestSchema",
+  "namespace": "org.example.MyUser",
+  "fields": [
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "age",
+      "type": "int"
+    }
+  ]
+}
