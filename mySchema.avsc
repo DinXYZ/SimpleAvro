@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "MyTestSchema",
-  "namespace": "org.example.MyUser",
+  "namespace": "org.example.dto.MyUser",
   "fields": [
     {
       "name": "name",

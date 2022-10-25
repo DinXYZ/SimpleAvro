@@ -1,0 +1,11 @@
+options:
+  bucketName: myBucket
+  safeScanFiles: 1,2,3
+  outputPath: output.avro
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.Schema;
@@ -6,6 +6,9 @@ import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.reflect.ReflectDatumReader;
 import org.apache.avro.reflect.ReflectDatumWriter;
+import org.example.dto.MyUser;
+import org.example.exceptions.IOFileException;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,7 +18,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
+@Service
 public class SimpleAvroService {
+
     public void createAvro(Schema schema, String outputPath, List<MyUser> users) {
         try (OutputStream out = new FileOutputStream(outputPath);
              OutputStream outSchema = new FileOutputStream("mySchema.avsc");
@@ -30,7 +35,7 @@ public class SimpleAvroService {
                 dataFileWriter.append(user);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOFileException(e.getMessage());
         }
     }
 
@@ -38,7 +43,7 @@ public class SimpleAvroService {
         try (DataFileReader<MyUser> dataFileReader = new DataFileReader<>(new File(inputPath), new ReflectDatumReader<>(MyUser.class))) {
             dataFileReader.iterator().forEachRemaining(user -> log.debug("User was restored: {}", user));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOFileException(e.getMessage());
         }
     }
 }
