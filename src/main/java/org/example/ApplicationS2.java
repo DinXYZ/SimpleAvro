@@ -37,7 +37,7 @@ public class ApplicationS2 implements CommandLineRunner {
             simpleService.action();
         }
 
-//        avro wright read
+//        avro/schema create, write and read
         Schema schema = SchemaBuilder.record("MyTestSchema")
                 .namespace("org.example.dto.MyUser")
                 .fields()
@@ -50,7 +50,7 @@ public class ApplicationS2 implements CommandLineRunner {
 
         simpleAvroService.readAvro(options.getOutputPath());
 
-//        safeScan files
+//        safeScan files from GCP bucket
         Map<String, Object> safeScanContent = safeScanService.parseContent(options.getBucketName(), options.getSafeScanFiles());
         safeScanContent.forEach((k, v) -> log.debug("Key: {}, value: {}", k, v));
     }
