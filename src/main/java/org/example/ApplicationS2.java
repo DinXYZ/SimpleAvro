@@ -50,6 +50,8 @@ public class ApplicationS2 implements CommandLineRunner {
 
         simpleAvroService.readAvro(options.getOutputPath());
 
+        simpleAvroService.writeJson(options.getOutputPath());
+
 //        safeScan files from GCP bucket
         Map<String, Object> safeScanContent = safeScanService.parseContent(options.getBucketName(), options.getSafeScanFiles());
         safeScanContent.forEach((k, v) -> log.debug("Key: {}, value: {}", k, v));
