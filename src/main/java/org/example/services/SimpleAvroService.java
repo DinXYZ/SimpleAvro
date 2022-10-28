@@ -33,7 +33,7 @@ public class SimpleAvroService {
              OutputStream outSchema = new FileOutputStream("mySchema.avsc");
              DataFileWriter<MyUser> dataFileWriter = new DataFileWriter<>(new ReflectDatumWriter<>(MyUser.class))) {
 
-            log.debug("Schema: {}", schema.toString(true));
+            log.debug("{} Schema: {}", this.getClass().getSuperclass().getSimpleName(), schema.toString(true));
             outSchema.write(schema.toString().getBytes(StandardCharsets.UTF_8));
 
             dataFileWriter.create(schema, out);

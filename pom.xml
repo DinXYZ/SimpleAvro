@@ -30,6 +30,7 @@
         <apache-avro.version>1.11.1</apache-avro.version>
         <snakeyaml.version>1.32</snakeyaml.version>
         <snappy-java.version>1.0.4.1_1</snappy-java.version>
+        <apache-beam.version>2.42.0</apache-beam.version>
     </properties>
 
     <dependencyManagement>
@@ -138,10 +139,32 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.servicemix.bundles</groupId>-->
+        <!--            <artifactId>org.apache.servicemix.bundles.snappy-java</artifactId>-->
+        <!--            <version>${snappy-java.version}</version>-->
+        <!--        </dependency>-->
+
+        <!--        Apache Beam-->
         <dependency>
-            <groupId>org.apache.servicemix.bundles</groupId>
-            <artifactId>org.apache.servicemix.bundles.snappy-java</artifactId>
-            <version>${snappy-java.version}</version>
+            <groupId>org.apache.beam</groupId>
+            <artifactId>beam-sdks-java-core</artifactId>
+            <version>${apache-beam.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>avro</artifactId>
+                    <groupId>org.apache.avro</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>error_prone_annotations</artifactId>
+                    <groupId>com.google.errorprone</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.beam</groupId>
+            <artifactId>beam-runners-direct-java</artifactId>
+            <version>${apache-beam.version}</version>
         </dependency>
     </dependencies>
 </project>

@@ -18,6 +18,7 @@ public class SafeScanService {
 
     public Map<String, Object> parseContent(String bucketName, List<String> safeScans) {
         Map<String, String> content = simpleCloudStorageUtils.getContent(bucketName, safeScans);
+        log.debug(this.getClass().getSimpleName());
         return content.entrySet().stream()
                 .filter(e -> StringUtils.isNotBlank(e.getValue()))
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> mapToObject(e.getValue())));
